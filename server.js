@@ -1,9 +1,11 @@
 require('dotenv').config();
 const express = require('express');
 const fetch = require('node-fetch');
+const zipcodeToTimezone = require('zipcode-to-timezone');
 const app = express();
 
 app.use(express.urlencoded({extended:true}));
+app.use(express.static("public"));
 
 app.set("view engine", "ejs");
 
@@ -24,10 +26,28 @@ try {
         if(weatherData.cod !== 200) {
             return res.send(`Error: ${weatherData.message}`)
         }
+        const tz = zipcodeToTimezone.lookup(zipcode);
+        let localTime = "Time unavailable";
+        if(tz) {
+            localTime = new Intl.DateTimeFormat("en-US", {
+                timezone: tz,
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true
+            }).format(new Date());
+        }
+        const now = new Date()
+        const localDate = now.toLocaleDateString("en-US", {
+            timeZone: tz,
+            dateStyle: "short"
+        });
+
         res.render("weather/show.ejs", {
             city: weatherData.name,
-            temperature: weatherData.main.temp,
-            description: weatherData.weather.map(wç => w.description.charAt(0).toUpperCase() + w.description.slice(1)).join(", ")
+            currentTime: localTime,
+            currentDate: localDate,
+            temperature: Math.round(weatherData.main.temp),
+            description: weatherData.weather.map(w => w.description.charAt(0).toUpperCase() + w.description.slice(1)).join(", ")
         });
     } catch (error) {
         console.log("Network error", error);

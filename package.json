@@ -13,6 +13,7 @@
     "dotenv": "^17.2.4",
     "ejs": "^4.0.1",
     "express": "^5.2.1",
-    "node-fetch": "^2.7.0"
+    "node-fetch": "^2.7.0",
+    "zipcode-to-timezone": "^0.0.9"
   }
 }
