@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather By Zip Code</title>
+</head>
+
+<body>
+    <h1>Enter Your Zip Code</h1>
+
+    <form action="/weather/submit-zipcode" method = "POST">
+        <label for="zipcode">Zip Code:</label>
+        <input type="text" id="zipcode" name="zipcode" required pattern="[0-9]{5}" title="Five Digit Zip Code">
+        <button type="Submit">Submit</button>
+    </form>
+</body>
+
+</html>
