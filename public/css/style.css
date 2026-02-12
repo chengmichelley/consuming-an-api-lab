@@ -1,0 +1,19 @@
+body.main-page {
+    background-color: #ECE4B7;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+body.weather-page {
+    background-color: #A3A5C3;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    min-height: 100vh;
+}
